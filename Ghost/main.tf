@@ -1,15 +1,12 @@
-# Download the latest Ghost blogging image
-resource "docker_image" "image_id" {
-  name = "${var.image}"
+module "image"  {
+  source = "./image"
+  image = "${var.image}"
 }
 
-# Start the Container
-resource "docker_container" "container_id" {
-  image = "${docker_image.image_id.latest}"
-  name  = "${var.name}"
-
-  ports {
-    internal = "${var.internal_port}"
-    external = "${var.external_port}"
-  }
+module "container" {
+  source = "./container"
+  image = "${module.image.image_out}"
+  name = "${var.container_name}"
+  int_port = "${var.int_port}"
+  ext_port = "${var.ext_port}"
 }

@@ -3,15 +3,15 @@ variable "image" {
   default = "ghost:latest"
 }
 
-variable "name" {
+variable "container_name" {
   description = "Name of Docker Container"
   default = "blog"
 }
 
-variable "internal_port" {
+variable "int_port" {
   default = "2368"
 }
 
-variable "external_port" {
+variable "ext_port" {
   default = "80"
 }
