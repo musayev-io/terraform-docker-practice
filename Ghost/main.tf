@@ -1,15 +1,34 @@
+variable "image" {
+  description = "Image for Container"
+  default = "ghost:latest"
+}
+
+variable "name" {
+  description = "Name of Docker Container"
+  default = "blog"
+}
+
+variable "internal_port" {
+  default = "2368"
+}
+
+variable "external_port" {
+  default = "80"
+}
+
 # Download the latest Ghost blogging image
 resource "docker_image" "image_id" {
-  name = "ghost:latest"
+  name = "${var.image}"
 }
 
 # Start the Container
 resource "docker_container" "container_id" {
   image = "${docker_image.image_id.latest}"
-  name = "blog"
+  name  = "${var.name}"
+
   ports {
-    internal = "2368"
-    external = "80"
+    internal = "${var.internal_port}"
+    external = "${var.external_port}"
   }
 }
 
