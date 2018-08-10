@@ -1,17 +1,39 @@
+
+# export TF_VAR_env = dev | prod
+variable "env" {
+  description = "env: dev or prod"
+}
+
 variable "image" {
   description = "Image for Container"
-  default = "ghost:latest"
+  type = "map"
+  default = {
+    dev = "ghost:latest"
+    prod = "ghost:alpine"
+  }
 }
 
 variable "container_name" {
   description = "Name of Docker Container"
-  default = "blog"
+  type = "map"
+  default {
+    dev = "dev_blog"
+    prod = "prod_blog"
+  }
 }
 
 variable "int_port" {
-  default = "2368"
+  type = "map"
+  default = {
+    dev = "2368"
+    prod = "2368"
+  }
 }
 
 variable "ext_port" {
-  default = "80"
+  type = "map"
+  default = {
+    dev = "8080"
+    prod = "80"
+  }
 }
