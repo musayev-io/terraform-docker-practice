@@ -2,7 +2,7 @@ module "image"  {
   source = "./image"
   image = "${lookup(var.image, var.env)}"
 }
-
+f
 module "container" {
   source = "./container"
   image = "${module.image.image_out}"
